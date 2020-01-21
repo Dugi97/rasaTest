@@ -4,7 +4,5 @@
 
 {% block body %}
     <a href="{{ path('product_new') }}">Add new product !!!</a>
-    <div class="products">
-        {{ render(controller('App\\Controller\\ProductController::getAllProducts')) }}
-    </div>
+    {{ render(controller('App\\Controller\\ProductController::getAllProducts')) }}
 {% endblock %}

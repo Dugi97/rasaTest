@@ -98,4 +98,27 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('homepage');
     }
+
+    /**
+     * @Route("/filter", name="description_filter")
+     * @param Request $request
+     * @param ProductRepository $productRepository
+     * @return Response
+     */
+    public function descriptionFilter(Request $request, ProductRepository $productRepository)
+    {
+        $text = $request->get('text');
+        $type = $request->get('type');
+        if ($type == 'name') {
+            $products = $productRepository->findByName($text);
+        } else {
+            $products = $productRepository->findByDesc($text);
+
+        }
+
+        return $this->render('product/index.html.twig', [
+            'products' => $products,
+            'user' => $this->getUser(),
+        ]);
+    }
 }
