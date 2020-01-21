@@ -9,6 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class BannedProduct
 {
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTime('now'));
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -19,12 +24,12 @@ class BannedProduct
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="bannedProducts")
      */
-    private $product_id;
+    private $product;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="bannedProducts")
      */
-    private $user_id;
+    private $user;
 
     /**
      * @ORM\Column(type="datetime")
@@ -34,30 +39,6 @@ class BannedProduct
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getProductId(): ?Product
-    {
-        return $this->product_id;
-    }
-
-    public function setProductId(?Product $product_id): self
-    {
-        $this->product_id = $product_id;
-
-        return $this;
-    }
-
-    public function getUserId(): ?User
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(?User $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
@@ -70,5 +51,37 @@ class BannedProduct
         $this->created_at = $created_at;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param mixed $product
+     */
+    public function setProduct($product): void
+    {
+        $this->product = $product;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
     }
 }

@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Product
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -52,6 +53,7 @@ class Product
     {
         $this->bannedProducts = new ArrayCollection();
         $this->productRatings = new ArrayCollection();
+        $this->setCreatedAt(new \DateTime('now'));
     }
 
     public function getId(): ?int

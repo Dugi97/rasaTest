@@ -1,7 +1,37 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello ProductController!{% endblock %}
-
-{% block body %}
-
-{% endblock %}
+<table class="table">
+    <th>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Times banned</td>
+            <td>Product rating</td>
+            <td>Ban</td>
+            <td>Rate</td>
+        </tr>
+    </th>
+    <tbody>
+    {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>Times banned</td>
+            <td>Product rating</td>
+            <td><a href="{{ path('ban', {product: product.id, user: user.id}) }}" class="btn btn-danger text-white">X</a></td>
+            <td>
+                <form action="{{ path('rate') }}" method="post">
+                    <input type="hidden" value="{{ product.id }}" name="product">
+                    <select name="rate" id="" onchange="submit()">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
