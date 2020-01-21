@@ -16,8 +16,16 @@
             <td>{{ product.id }}</td>
             <td>{{ product.name }}</td>
             <td>{{ product.description }}</td>
-            <td>Times banned</td>
-            <td>Product rating</td>
+            <td>{{ product.bannedProducts|length }}</td>
+            {% set rateTotal = 0 %}
+            {% if product.productRatings|length > 0 %}
+                {% for rate in product.productRatings %}
+                    {% set rateTotal = rateTotal + rate.rating %}
+                {% endfor %}
+                {% set rateTotal = rateTotal / (product.productRatings|length) %}
+            {% endif %}
+
+            <td>{{ rateTotal }}</td>
             <td><a href="{{ path('ban', {product: product.id, user: user.id}) }}" class="btn btn-danger text-white">X</a></td>
             <td>
                 <form action="{{ path('rate') }}" method="post">

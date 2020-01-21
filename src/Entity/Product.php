@@ -40,12 +40,12 @@ class Product
     private $created_by;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BannedProduct", mappedBy="product_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\BannedProduct", mappedBy="product")
      */
     private $bannedProducts;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductRating", mappedBy="product_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductRating", mappedBy="product")
      */
     private $productRatings;
 
